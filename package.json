@@ -1,0 +1,30 @@
+{
+  "name": "@hamgom95/asiter",
+  "version": "0.1.0",
+  "description": "async iterator helper functions",
+  "main": "src/index.mjs",
+  "keywords": [
+    "async",
+    "iterator"
+  ],
+  "scripts": {
+    "test": "node --experimental-modules src/**.spec.mjs",
+    "build:doc": "jsdoc src/**",
+    "build:readme": "jsdoc2md --heading-depth=4 --template README.tpl.md \"src/!(*.spec.js|helpers.js)\" > README.md",
+    "prepublish": "npm run build:readme"
+  },
+  "author": {
+    "name": "Kevin Thomas",
+    "email": "hamgom95@gmail.com"
+  },
+  "devDependencies": {
+    "jsdoc": "^3.5.5",
+    "jsdoc-to-markdown": "^4.0.1",
+    "tape": "^4.10.1"
+  },
+  "files": [
+    "/src"
+  ],
+  "license": "ISC",
+  "dependencies": {}
+}
