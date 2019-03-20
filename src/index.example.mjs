@@ -1,5 +1,10 @@
 import * as asiter from "./index";
 
+const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+
+
+
 async function testZipLongest() {
     const vals = await collect(zipLongest(of(1,2,3), of(4,5), of(6)));
     console.log(vals);

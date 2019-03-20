@@ -1,11 +1,11 @@
 import {simulate} from "./simulate";
+import {collect} from "./collect";
 
 import tape from "tape";
 
 tape("simulate", async (t) => {
-    t.plan(3);
-
-    for await (const item of simulate([["a"], ["b", 100], ["c"]])) {
-        t.pass();
-    }
+    const vals = await collect(simulate([["a"], ["b", 100], ["c"]]));
+    t.deepEqual(vals, ["a", "b", "c"]);
+    t.end();
 });
+

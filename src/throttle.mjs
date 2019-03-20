@@ -6,7 +6,6 @@ export async function* throttle(asyncIter, ms) {
     for await (const item of asyncIter) { 
         if (!pendingTimerPromise) { 
             yield item;
-            transmit = false; 
             pendingTimerPromise = wait(ms).then(() => pendingTimerPromise = null);
         }
     }
