@@ -20,6 +20,8 @@ export { takeWhile } from "./takeWhile";
 export { takeRange } from "./takeRange";
 export { flatMapLatest } from "./flatMapLatest";
 export { readStream } from "./readStream";
+export { readLines } from "./readLines";
 export { zip } from "./zip";
+export { zipLongest } from "./zipLongest";
 export { of } from "./of";
 export { interval } from "./interval";

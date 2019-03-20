@@ -1,14 +1,14 @@
-const fs = require("fs");
-const readline = require("readline");
+import * as asiter from "./index";
 
+async function testZipLongest() {
+    const vals = await collect(zipLongest(of(1,2,3), of(4,5), of(6)));
+    console.log(vals);
+}
 
-
-async function* readLines(filename) {
-    const interface = readline.createInterface({
-        input: fs.createReadStream(filename, {encoding: 'utf8'})
-    });
-    // yield from (use new readline async generator interface)
-    return yield* interface;
+async function testWalkDir() {
+    for await (const [filepath, relative, filename] of walkDir("/tmp/1")) {
+        console.log({filename, filepath, relative});
+    }
 }
 
 // convert buffer chunks to strings
@@ -83,7 +83,7 @@ async function test_tee() {
     tee(new Ticker(200), spool(log1()), spool(log2()));
 }
 
-(async function() {
+async function test() {
 
     const a = () => simulate([
         ["a", 100],
@@ -129,4 +129,4 @@ async function test_tee() {
         if (val > 3) break;
     }
 
-}());
+}
