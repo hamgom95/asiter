@@ -25,3 +25,4 @@ export { zip } from "./zip";
 export { zipLongest } from "./zipLongest";
 export { of } from "./of";
 export { interval } from "./interval";
+export { scan } from "./scan";
