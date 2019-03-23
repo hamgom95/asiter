@@ -1,26 +1,41 @@
 import * as asiter from "./index";
 
+import * as readline from "readline";
+import * as fs from "fs";
+(async function () {
+    let i = 0;
+    const lineReader = readline.createInterface({
+        input: fs.createReadStream("/etc/magic", { encoding: 'utf8' })
+    });
+
+    for await (const line of asiter.fromLineReader(lineReader)) {
+        console.log("->" + line);
+    }
+
+}());
+
+
 const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 async function testZipLongest() {
-    const vals = await collect(zipLongest(of(1,2,3), of(4,5), of(6)));
+    const vals = await collect(zipLongest(of(1, 2, 3), of(4, 5), of(6)));
     console.log(vals);
 }
 
 async function testWalkDir() {
     for await (const [filepath, relative, filename] of walkDir("/tmp/1")) {
-        console.log({filename, filepath, relative});
+        console.log({ filename, filepath, relative });
     }
 }
 
 // convert buffer chunks to strings
-const bufferToChunks = (chunksAsync, encoding="utf-8") => map(chunksAsync, chunk => chunk.toString(encoding));
+const bufferToChunks = (chunksAsync, encoding = "utf-8") => map(chunksAsync, chunk => chunk.toString(encoding));
 
 // async iter to array
 const collect2 = asyncIter => reduce(asyncIter, (acc, item) => [...acc, item], []);
 
 // count elements in async iterator 
-const count = asyncIter => reduce(asyncIter, (acc, item) => acc+1, 0);
+const count = asyncIter => reduce(asyncIter, (acc, item) => acc + 1, 0);
 
 // cahin async generators tugether (alternative to streams)
 async function countLines(filename) {
@@ -32,7 +47,7 @@ async function countLines(filename) {
 }
 
 class Ticker {
-    constructor(interval=1000) {
+    constructor(interval = 1000) {
         this.interval = interval;
         this[Symbol.asyncIterator] = this[Symbol.asyncIterator].bind(this);
     }
@@ -124,7 +139,7 @@ async function test() {
     }
 
     const lines = await countLines(__filename);
-    console.log({lines});
+    console.log({ lines });
 
     for await (const val of new Ticker(1000)) {
         console.log(val);
