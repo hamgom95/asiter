@@ -26,4 +26,4 @@ export { zipLongest } from "./zipLongest";
 export { of } from "./of";
 export { interval } from "./interval";
 export { scan } from "./scan";
-export { Subject } from "./subject";
+export { Subject } from "./Subject";
